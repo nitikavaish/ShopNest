@@ -1,0 +1,85 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================
+   GLOBAL STYLES
+========================= */
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+    font-family: 'Outfit', sans-serif;
+  }
+
+  body {
+    @apply bg-[#09090b] text-[#fafafa] min-h-screen overflow-x-hidden;
+  }
+
+  a {
+    @apply no-underline text-inherit transition-all duration-300;
+  }
+
+  ul {
+    @apply list-none;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-bold tracking-[-0.5px] mb-5;
+  }
+
+  h2 {
+    @apply text-[2.2rem] bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent;
+  }
+}
+
+/* =========================
+   REUSABLE COMPONENTS
+========================= */
+
+@layer components {
+  .main-content {
+    @apply min-h-[85vh] px-5 py-10 max-w-[1400px] mx-auto animate-fadeIn;
+  }
+
+  .btn {
+    @apply inline-block text-center text-white
+      px-6 py-3 border-0 rounded-lg
+      font-semibold text-[15px] cursor-pointer
+      transition-all duration-300
+      bg-gradient-to-br from-orange-500 to-orange-600
+      shadow-[0_4px_14px_rgba(234,88,12,0.3)]
+      hover:-translate-y-0.5 hover:brightness-110
+      active:translate-y-px;
+  }
+
+  .btn:hover {
+    box-shadow: 0 6px 20px rgba(234, 88, 12, 0.5);
+  }
+}
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #09090b;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #27272a;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3f3f46;
+  }
+}
