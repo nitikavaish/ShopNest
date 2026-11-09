@@ -8,6 +8,7 @@ const orderRoute = require("./routes/orderRoute.js");
 const paymentRoute = require("./routes/paymentRoute.js");
 const analyticsRoutes = require("./routes/analyticsRoutes.js");
 const cartRoutes = require("./routes/cartRoute");
+const path = require("path");
 dotenv.config();
 connectDB();
 
