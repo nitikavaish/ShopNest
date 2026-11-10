@@ -1,15 +1,6 @@
+import React, { useEffect, useState, useContext } from "react";
 
-import React, {
-  useEffect,
-  useState,
-  useContext,
-} from "react";
-
-import {
-  useParams,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -66,7 +57,7 @@ const ProductDetail = () => {
       setAdding(true);
 
       const response = await axios.post(
-        "http://localhost:5000/api/cart/add",
+        "/api/cart/add",
         {
           productId: product._id,
           qty: 1,
@@ -75,7 +66,7 @@ const ProductDetail = () => {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
-        }
+        },
       );
 
       // Update Redux with backend response
@@ -85,10 +76,7 @@ const ProductDetail = () => {
     } catch (error) {
       console.error("Add to cart error:", error);
 
-      alert(
-        error.response?.data?.message ||
-        "Unable to add product to cart"
-      );
+      alert(error.response?.data?.message || "Unable to add product to cart");
     } finally {
       setAdding(false);
     }
@@ -105,14 +93,9 @@ const ProductDetail = () => {
   if (!product) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-950 text-white">
-        <h2 className="text-2xl font-bold">
-          Product Not Found
-        </h2>
+        <h2 className="text-2xl font-bold">Product Not Found</h2>
 
-        <Link
-          to="/shop"
-          className="mt-4 text-orange-500 hover:text-orange-400"
-        >
+        <Link to="/shop" className="mt-4 text-orange-500 hover:text-orange-400">
           Back to Shop
         </Link>
       </div>
@@ -122,7 +105,6 @@ const ProductDetail = () => {
   return (
     <div className="min-h-screen bg-zinc-950 px-4 py-12 text-white sm:px-8">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-2">
-
         {/* Product Image */}
         <div className="overflow-hidden rounded-2xl bg-zinc-900">
           <img
@@ -134,30 +116,20 @@ const ProductDetail = () => {
 
         {/* Product Information */}
         <div className="flex flex-col justify-center">
-          <p className="mb-3 text-sm text-orange-500">
-            {product.category}
-          </p>
+          <p className="mb-3 text-sm text-orange-500">{product.category}</p>
 
-          <h1 className="text-3xl font-bold sm:text-4xl">
-            {product.name}
-          </h1>
+          <h1 className="text-3xl font-bold sm:text-4xl">{product.name}</h1>
 
           <p className="mt-5 text-2xl font-bold text-orange-500">
             ₹{product.price}
           </p>
 
-          <p className="mt-6 leading-7 text-zinc-400">
-            {product.description}
-          </p>
+          <p className="mt-6 leading-7 text-zinc-400">{product.description}</p>
 
           <p className="mt-5 text-sm">
             Stock:{" "}
             <span
-              className={
-                product.stock > 0
-                  ? "text-green-400"
-                  : "text-red-400"
-              }
+              className={product.stock > 0 ? "text-green-400" : "text-red-400"}
             >
               {product.stock > 0
                 ? `${product.stock} available`
