@@ -14,7 +14,7 @@ const Cart = () => {
 
   const { user } = useContext(AuthContext);
 
-  const API = "http://localhost:5000/api/cart";
+  const API = "/api/cart";
 
   const headers = {
     Authorization: `Bearer ${user?.token}`,
