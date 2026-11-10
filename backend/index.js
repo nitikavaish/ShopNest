@@ -26,6 +26,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/auth", userRoute);
+app.use("/api/products", productRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/payment", paymentRoute);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/cart", cartRoutes);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
 
@@ -37,13 +44,6 @@ if (process.env.NODE_ENV === "production") {
     res.send("ShopNest API is running in Development mode...");
   });
 }
-
-app.use("/api/auth", userRoute);
-app.use("/api/products", productRoute);
-app.use("/api/orders", orderRoute);
-app.use("/api/payment", paymentRoute);
-app.use("/api/analytics", analyticsRoutes);
-app.use("/api/cart", cartRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
