@@ -5,7 +5,8 @@ import { clearCart, setCartItems } from "../redux/cartSlice";
 
 export const AuthContext = createContext();
 
-const API = "http://localhost:5000/api";
+// Same-origin API URL for local and deployed environments
+const API = "/api";
 
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  // Fetch the currently logged-in user's cart
+  // Fetch currently logged-in user's cart
   useEffect(() => {
     let active = true;
 
@@ -51,6 +52,7 @@ export const AuthProvider = ({ children }) => {
     };
   }, [user, dispatch]);
 
+  // Login
   const login = async (userData) => {
     const response = await axios.post(`${API}/auth/login`, userData);
 
@@ -59,12 +61,12 @@ export const AuthProvider = ({ children }) => {
     dispatch(clearCart());
 
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
-
     setUser(userInfo);
 
     return userInfo;
   };
 
+  // Logout
   const logout = () => {
     setUser(null);
     dispatch(clearCart());
@@ -73,6 +75,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("cartItems");
   };
 
+  // Register
   const register = async (userData) => {
     const response = await axios.post(`${API}/auth/register`, userData);
 
